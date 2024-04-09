@@ -22,7 +22,7 @@ export class RestaurantsService {
     return res;
   }
 
-  // Get a Restaurant By ID => /restaurants/:id
+  // Get a Restaurant By ID => GET /restaurants/:id
   async findByID(id: string): Promise<Restaurant> {
     const restaurant = await this.restaurantModel.findById(id);
 
@@ -31,5 +31,13 @@ export class RestaurantsService {
     }
 
     return restaurant;
+  }
+
+  // Update a Restaurant By ID => PUT /restaurants/:id
+  async updateByID(id: string, restaurant: Restaurant): Promise<Restaurant> {
+    return await this.restaurantModel.findByIdAndUpdate(id, restaurant, {
+      new: true,
+      runValidators: true,
+    });
   }
 }
