@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { RestaurantsService } from './restaurants.service';
 import { Restaurant } from './schemas/restaurant.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
+import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 
 @Controller('restaurants')
 export class RestaurantsController {
@@ -33,7 +34,7 @@ export class RestaurantsController {
     @Param('id')
     id: string,
     @Body()
-    restaurant,
+    restaurant: UpdateRestaurantDto,
   ): Promise<Restaurant> {
     await this.restaurantsService.findByID(id);
     return this.restaurantsService.updateByID(id, restaurant);
